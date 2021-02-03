@@ -8,7 +8,7 @@ namespace Entities.Concrate
     public class CarBrand:IEntity
     {
 
-        public int Id { get; set; }
+        public int BrandId { get; set; }
         public string Brand { get; set; }
     }
 }

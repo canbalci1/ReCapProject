@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Entities.Concrate
 {
-    public class CarColor:IEntity
+    public class CarDtoColor:IEntity
     {
-        public int ColorId { get; set; }
-        public string Color { get; set; }
+        public int Id { get; set; }
+        
     }
 }

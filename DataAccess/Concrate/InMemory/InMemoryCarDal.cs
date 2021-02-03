@@ -10,6 +10,8 @@ namespace DataAccess.Concrate.InMemory
     public class InMemoryCarDal : ICarDal
     {
         List<Car> _car;
+        List<CarBrand> _brands;
+        List<CarColor> _color;
         public InMemoryCarDal()
         {
             _car = new List<Car> {
@@ -21,6 +23,36 @@ namespace DataAccess.Concrate.InMemory
 
 
             };
+
+            _brands = new List<CarBrand> {
+            new CarBrand {BrandId =1 ,Brand="Volkswagen"},
+            new CarBrand {BrandId =2 ,Brand="Audi"},
+
+            };
+            _color = new List<CarColor>
+            {
+                new CarColor {ColorId=1,Color="White"},
+                new CarColor {ColorId=2 , Color="Black"},
+            };
+
+            var result = from c in _car
+                         join b in _brands 
+                         on c.BrandId equals b.BrandId
+                         join col in _color
+                         on c.ColorId equals col.ColorId
+
+
+                         select new CarDtoBrand { Id = c.Id, Brand = b.Brand, BrandId = c.BrandId ,ColorId = c.ColorId, Color = col.Color ,
+                             DailyPrice=c.DailyPrice, Description =c.Description,ModelYear=c.ModelYear};
+            
+            foreach (var carDto in result)
+            {
+                Console.WriteLine("{0} {1} {2} {3} {4} {5}", carDto.Id,carDto.Brand,carDto.Color,carDto.DailyPrice,carDto.Description,carDto.ModelYear);
+            }
+           
+           
+
+
         }
         public void Add(Car car)
         {
