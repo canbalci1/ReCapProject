@@ -18,6 +18,7 @@ namespace DataAccess.Concrate.EntityFramework
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarBrand> CarBrand { get; set; }
         public DbSet<CarColor> CarColor { get; set; }
+        public DbSet<CarList> CarList { get; set; }
 
     }
 }

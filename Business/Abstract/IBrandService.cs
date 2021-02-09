@@ -1,14 +1,13 @@
 ﻿using Entities.Concrate;
-using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Business.Abstract
 {
-    public interface ICarService
+    public interface IBrandService
     {
-        List<Car> GetAll();
-        List<CarDetailDto> GetCarDetail();
+        List<CarBrand> GetAll();
+        CarBrand GetById(int brandId);
     }
 }

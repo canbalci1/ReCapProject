@@ -8,38 +8,37 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            //Brand();
+            //Color();
+            Car();
+
+        }
+
+        private static void Car()
+        {
             CarManager carManager = new CarManager(new EfCarDal());
-
-            string s = "";
-
-            foreach (var c in carManager.GetAll())
+            foreach (var car in carManager.GetCarDetail())
             {
-                s += ($"Car Id: {c.Id} \nBrand ID: {c.BrandId} \nColor ID: {c.ColorId} \nModel Year: {c.ModelYear} \nDaily Price: {c.DailyPrice} \nDescription: {c.Description} \n\n");
-
+                Console.WriteLine(car.Brand + " " + car.Color +" "+ car.DailyPrice);
             }
+        }
 
-            Console.WriteLine(s);
-            Console.WriteLine("\nCars with brand id 1: ");
-            foreach (var c in carManager.GetCarsByBrandId(1))
+        private static void Color()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            foreach (var color in colorManager.GetAll())
             {
-
-                Console.WriteLine("Car Id: " + c.Id);
-
+                Console.WriteLine(color.Color);
             }
+        }
 
-            Console.WriteLine("\nCars with color id 2: ");
-            foreach (var c in carManager.GetCarsByColorId(2))
+        private static void Brand()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            foreach (var brand in brandManager.GetAll())
             {
-                Console.WriteLine("Car Id: " + c.Id);
-
+                Console.WriteLine(brand.Brand);
             }
-
-
-
-
-
-
-
         }
     }
 }

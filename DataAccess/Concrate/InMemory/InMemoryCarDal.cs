@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrate;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,21 +38,29 @@ namespace DataAccess.Concrate.InMemory
             };
 
             var result = from c in _car
-                         join b in _brands 
+                         join b in _brands
                          on c.BrandId equals b.BrandId
                          join col in _color
                          on c.ColorId equals col.ColorId
 
 
-                         select new CarDtoBrand { Id = c.Id, Brand = b.Brand, BrandId = c.BrandId ,ColorId = c.ColorId, Color = col.Color ,
-                             DailyPrice=c.DailyPrice, Description =c.Description,ModelYear=c.ModelYear};
-            
+                         select new CarList
+                         {
+                             Id = c.Id,
+                             BrandId = c.BrandId,
+                             ColorId = c.ColorId,
+                             DailyPrice = c.DailyPrice,
+                             Description = c.Description,
+                             ModelYear = c.ModelYear
+                         };
+
             foreach (var carDto in result)
             {
-                Console.WriteLine("{0} {1} {2} {3} {4} {5}", carDto.Id,carDto.Brand,carDto.Color,carDto.DailyPrice,carDto.Description,carDto.ModelYear);
+                Console.WriteLine("{0} {1} {2} {3} {4} {5}", carDto.Id, carDto.ColorId, carDto.BrandId, carDto.DailyPrice,
+                    carDto.Description, carDto.ModelYear);
             }
-           
-           
+
+
 
 
         }
@@ -62,7 +71,7 @@ namespace DataAccess.Concrate.InMemory
 
         public void Delete(Car car)
         {
-            Car carDelete = _car.SingleOrDefault(c => c.Id == car.Id );
+            Car carDelete = _car.SingleOrDefault(c => c.Id == car.Id);
             _car.Remove(carDelete);
         }
 
@@ -78,15 +87,18 @@ namespace DataAccess.Concrate.InMemory
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            return _car;
         }
 
-        public List <Car> GetById(int brandId)
+        public List<Car> GetById(int brandId)
         {
             return _car.Where(c => c.BrandId == brandId).ToList();
         }
 
-       
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
+        }
 
         public void Update(Car car)
         {
