@@ -9,5 +9,8 @@ namespace Business.Abstract
     {
         List<CarColor> GetAll();
         CarColor GetByColor(int brandColor);
+        void Add(CarColor color);
+        void Update(CarColor color);
+        void Delete(CarColor color);
     }
 }

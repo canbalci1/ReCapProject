@@ -16,11 +16,23 @@ namespace ConsoleApp1
 
         private static void Car()
         {
+            
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetail())
+            var result = carManager.GetCarDetail();
+            if (result.Success)
             {
-                Console.WriteLine(car.Brand + " " + car.Color +" "+ car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.Brand + " " + car.Color + " " + car.DailyPrice);
+                }
+               
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+          
         }
 
         private static void Color()

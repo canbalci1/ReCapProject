@@ -17,6 +17,16 @@ namespace Business.Concrate
             _brandDal = brandDal;
         }
 
+        public void Add(CarBrand brand)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(CarBrand brandr)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<CarBrand> GetAll()
         {
             return _brandDal.GetAll();
@@ -27,6 +37,9 @@ namespace Business.Concrate
             return _brandDal.Get(c => c.BrandId == brandId);
         }
 
-        
+        public void Update(CarBrand brand)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
