@@ -1,6 +1,8 @@
 ﻿using Business.Concrate;
+using Business.Constants;
 using DataAccess.Concrate.EntityFramework;
 using DataAccess.Concrate.InMemory;
+using Entities.Concrate;
 using System;
 namespace ConsoleApp1
 {
@@ -10,8 +12,26 @@ namespace ConsoleApp1
         {
             //Brand();
             //Color();
-            Car();
+            //Car();
+            UserAdd();
 
+        }
+
+        private static void UserAdd()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            User user = new User
+            {
+                
+                FirstName = "Elif",
+                LastName = "Çetin",
+                Email = "elifcetin@hotmail.com" ,
+                Password = "123456"
+            };
+            userManager.Add(user);
+            Console.WriteLine(Messages.UserAdded);
+            
+            Console.ReadLine();
         }
 
         private static void Car()

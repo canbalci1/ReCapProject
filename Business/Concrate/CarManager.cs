@@ -38,13 +38,13 @@ namespace Business.Concrate
         public IResult Update(Car car)
         {
             _carDal.Update(car);
-            return new SuccessResult(Messages.CarUptaded);
+            return new SuccessResult(Messages.CarUpdated);
 
         }
 
         public IDataResult<List<Car>> GetAll()
         {
-            if (DateTime.Now.Hour==13)
+            if (DateTime.Now.Hour==6)
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintinanceTime);
             }
