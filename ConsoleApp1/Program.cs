@@ -10,7 +10,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //Brand();
+            Brand();
             //Color();
             //Car();
             UserAdd();
@@ -67,9 +67,18 @@ namespace ConsoleApp1
         private static void Brand()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
+            var result = brandManager.GetAll();
+            if (result.Success)
             {
-                Console.WriteLine(brand.Brand);
+                foreach (var brand in result.Data)
+                {
+                    Console.WriteLine(brand.BrandId + " " + brand.Brand);
+                }
+
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
         }
     }

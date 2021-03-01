@@ -21,12 +21,24 @@ namespace Business.Concrate
 
         public IResult Add(Car car)
         {
-            if (car.Id<5)
+
+            if(car.BrandId >0 && car.BrandId<=3  && car.DailyPrice > 0)
             {
-                return new ErrorResult(Messages.CarIdInvalid);
+                _carDal.Add(car);
+
+                return new SuccessResult(Messages.CarAdded);
             }
-            _carDal.Add(car);
-            return new SuccessResult(Messages.CarAdded);
+            return new ErrorResult(Messages.CarIdInvalid);
+
+
+
+
+            //if (car.Id<5)
+            //{
+            //    return new ErrorResult(Messages.CarIdInvalid);
+            //}
+            //_carDal.Add(car);
+            //return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(Car car)
@@ -52,14 +64,16 @@ namespace Business.Concrate
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.ProductsListed);
         }
 
+        public IDataResult<Car> GetById(int carId)
+        {
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == carId));
+        }
+
         public IDataResult< List<CarDetailDto>> GetCarDetail()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
-        public IDataResult< Car> GetById(int carId)
-        {
-            return new SuccessDataResult <Car>(_carDal.Get(c=> c.Id == carId));
-        }
+       
     }
 }

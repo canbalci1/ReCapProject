@@ -1,5 +1,7 @@
-﻿using Entities.Concrate;
+﻿using Core.Utilities.Results;
+using Entities.Concrate;
 using System;
+using Entities.DTOs;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,10 +9,10 @@ namespace Business.Abstract
 {
     public interface IBrandService
     {
-        List<CarBrand> GetAll();
-        CarBrand GetById(int brandId);
-        void Add(CarBrand brand);
-        void Update(CarBrand brand);
-        void Delete(CarBrand brandr);
+        IDataResult< List<CarBrand>> GetAll();
+        IDataResult <CarBrand> GetById(int brandId);
+        IResult  Add(CarBrand brand);
+        IResult  Update(CarBrand brand);
+        IResult  Delete(CarBrand brand);
     }
 }

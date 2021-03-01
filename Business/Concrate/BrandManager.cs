@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
 using System;
@@ -17,29 +19,42 @@ namespace Business.Concrate
             _brandDal = brandDal;
         }
 
-        public void Add(CarBrand brand)
+        public IResult Add(CarBrand brand)
         {
-            throw new NotImplementedException();
+            if (brand.BrandId > 0 && brand.BrandId <= 3 )
+            {
+                _brandDal.Add(brand);
+
+                return new SuccessResult(Messages.BrandAdded);
+            }
+            return new ErrorResult(Messages.CarIdInvalid);
         }
 
-        public void Delete(CarBrand brandr)
+        public IResult Delete(CarBrand brand)
         {
-            throw new NotImplementedException();
+            _brandDal.Delete(brand);
+            return new SuccessResult(Messages.BrandDeleted);
         }
 
-        public List<CarBrand> GetAll()
+        public IDataResult<List <CarBrand>> GetAll()
         {
-            return _brandDal.GetAll();
+            if (DateTime.Now.Hour == 6)
+            {
+                return new ErrorDataResult<List<CarBrand>>(Messages.MaintinanceTime);
+            }
+
+            return new SuccessDataResult<List<CarBrand>>(_brandDal.GetAll(), Messages.ProductsListed);
         }
 
-        public CarBrand GetById(int brandId)
+        public IDataResult <CarBrand> GetById(int brandId)
         {
-            return _brandDal.Get(c => c.BrandId == brandId);
+            return new SuccessDataResult<CarBrand>(_brandDal.Get(c => c.BrandId == brandId));
         }
 
-        public void Update(CarBrand brand)
+        public IResult Update(CarBrand brand)
         {
-            throw new NotImplementedException();
+            _brandDal.Update(brand);
+            return new SuccessResult(Messages.BrandUpdated);
         }
     }
 }
