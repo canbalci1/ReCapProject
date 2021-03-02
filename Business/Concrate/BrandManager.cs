@@ -21,7 +21,7 @@ namespace Business.Concrate
 
         public IResult Add(CarBrand brand)
         {
-            if (brand.BrandId > 0 && brand.BrandId <= 3 )
+            if (brand.BrandId >= 0 && brand.BrandId <= 3 )
             {
                 _brandDal.Add(brand);
 

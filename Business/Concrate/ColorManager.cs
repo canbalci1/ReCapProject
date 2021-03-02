@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
 using System;
@@ -16,9 +18,15 @@ namespace Business.Concrate
             _colorDal = colorDal;
         }
 
-        public void Add(CarColor color)
+        public IResult Add(CarColor color)
         {
-            throw new NotImplementedException();
+
+
+            _colorDal.Add(color);
+            return new SuccessResult(Messages.BrandAdded);
+
+
+
         }
 
         public void Delete(CarColor color)
