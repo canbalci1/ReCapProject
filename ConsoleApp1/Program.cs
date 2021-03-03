@@ -58,10 +58,19 @@ namespace ConsoleApp1
         private static void Color()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
+            var result = colorManager.GetAll();
+            if (result.Success)
             {
-                Console.WriteLine(color.Color);
+                foreach (var color in result.Data)
+                {
+                    Console.WriteLine(color.Color);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+          
         }
 
         private static void Brand()

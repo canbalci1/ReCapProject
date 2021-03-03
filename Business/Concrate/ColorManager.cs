@@ -20,33 +20,32 @@ namespace Business.Concrate
 
         public IResult Add(CarColor color)
         {
-
-
             _colorDal.Add(color);
             return new SuccessResult(Messages.BrandAdded);
-
-
-
         }
 
-        public void Delete(CarColor color)
+        public IResult Delete(CarColor color)
         {
-            throw new NotImplementedException();
+            _colorDal.Delete(color);
+            return new SuccessResult(Messages.ColorDeleted);
         }
 
-        public List<CarColor> GetAll()
+        public IDataResult< List<CarColor>> GetAll()
         {
-            return _colorDal.GetAll();
+            _colorDal.GetAll();
+            return new SuccessDataResult<List<CarColor>>(_colorDal.GetAll(), Messages.ProductsListed);
         }
 
-        public CarColor GetByColor(int brandColor)
+        public IDataResult< CarColor> GetByColor(int colorId)
         {
-            return _colorDal.Get(c => c.ColorId == brandColor);
+            
+            return new SuccessDataResult<CarColor>( _colorDal.Get(c => c.ColorId == colorId));
         }
 
-        public void Update(CarColor color)
+        public IResult Update(CarColor color)
         {
-            throw new NotImplementedException();
+            _colorDal.Update(color);
+            return new SuccessResult(Messages.ColorUpdated);
         }
     }
 }

@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ColorsController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        IColorService _colorService;
+        IUserService _userService;
 
-        public ColorsController(IColorService colorService)
+        public UsersController(IUserService userService)
         {
-            _colorService = colorService;
+            _userService = userService;
         }
 
-        [HttpGet("getall")]
+        [HttpGet ("getall")]
         public IActionResult GetAll()
         {
-            var result = _colorService.GetAll();
+            var result = _userService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -31,11 +31,12 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int colorid)
+
+        [HttpGet ("getbyid")]
+        public IActionResult GetById(int usersid)
         {
-            var result = _colorService.GetByColor(colorid);
-            if (result.Success)
+            var result = _userService.GetById(usersid);
+            if(result.Success)
             {
                 return Ok(result);
             }
@@ -43,19 +44,21 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(CarColor color)
-        {        
-        var result = _colorService.Add(color);
-        if (result.Success)
+        public IActionResult Add(User users)
+        {
+            var result = _userService.Add(users);
+            if (result.Success)
             {
-                return Ok(result);
+             return Ok(result);
             }
             return BadRequest(result);
+
         }
+
         [HttpPost("delete")]
-        public IActionResult Delete(CarColor color)
+        public IActionResult Delete(User users)
         {
-            var result = _colorService.Delete(color);
+            var result = _userService.Delete(users);
             if (result.Success)
             {
                 return Ok(result);
@@ -64,17 +67,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update (CarColor color)
+        public IActionResult Update (User users)
         {
-            var result = _colorService.Update(color);
-            if(result.Success)
+            var result = _userService.Update(users);
+            if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        
 
-       
     }
 }
