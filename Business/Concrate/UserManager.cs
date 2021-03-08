@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCutingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
@@ -18,7 +20,7 @@ namespace Business.Concrate
         }
         public IResult Add(User user)
         {
-
+            ValidationTool.Validate(new UserValidator(), user);
 
 
             _userDal.Add(user);

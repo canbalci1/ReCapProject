@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCutingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
@@ -21,13 +23,9 @@ namespace Business.Concrate
 
         public IResult Add(CarBrand brand)
         {
-            if (brand.BrandId >= 0 && brand.BrandId <= 3 )
-            {
-                _brandDal.Add(brand);
-
-                return new SuccessResult(Messages.BrandAdded);
-            }
-            return new ErrorResult(Messages.CarIdInvalid);
+            ValidationTool.Validate(new BrandValidator(), brand);
+            _brandDal.Add(brand);
+            return new SuccessResult(Messages.BrandAdded);
         }
 
         public IResult Delete(CarBrand brand)
@@ -38,10 +36,12 @@ namespace Business.Concrate
 
         public IDataResult<List <CarBrand>> GetAll()
         {
-            if (DateTime.Now.Hour == 6)
-            {
-                return new ErrorDataResult<List<CarBrand>>(Messages.MaintinanceTime);
-            }
+            //if (DateTime.Now.Hour == 6)
+            //{
+            //    return new ErrorDataResult<List<CarBrand>>(Messages.MaintinanceTime);
+            //}
+
+
 
             return new SuccessDataResult<List<CarBrand>>(_brandDal.GetAll(), Messages.ProductsListed);
         }

@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCutingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrate;
@@ -20,6 +22,7 @@ namespace Business.Concrate
 
         public IResult Add(CarColor color)
         {
+            ValidationTool.Validate(new ColorValidator(), color);
             _colorDal.Add(color);
             return new SuccessResult(Messages.BrandAdded);
         }

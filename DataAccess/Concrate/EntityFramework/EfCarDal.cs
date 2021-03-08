@@ -25,7 +25,7 @@ namespace DataAccess.Concrate.EntityFramework
 
                              select new CarDetailDto
                              {
-                                 Id = c.Id,                                 
+                                 Id = c.Id,                                
                                  Brand = b.Brand,
                                  Color = co.Color,
                                  DailyPrice = c.DailyPrice,
