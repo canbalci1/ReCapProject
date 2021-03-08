@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCutingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -20,14 +21,14 @@ namespace Business.Concrate
         {
             _brandDal = brandDal;
         }
-
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(CarBrand brand)
         {
-            ValidationTool.Validate(new BrandValidator(), brand);
+            
             _brandDal.Add(brand);
             return new SuccessResult(Messages.BrandAdded);
         }
-
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Delete(CarBrand brand)
         {
             _brandDal.Delete(brand);
@@ -50,7 +51,7 @@ namespace Business.Concrate
         {
             return new SuccessDataResult<CarBrand>(_brandDal.Get(c => c.BrandId == brandId));
         }
-
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Update(CarBrand brand)
         {
             _brandDal.Update(brand);

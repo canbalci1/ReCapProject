@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCutingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -18,10 +19,11 @@ namespace Business.Concrate
         {
             _rentalDal = rentalDal;
         }
+        [ValidationAspect(typeof(RentalValidator))]
 
         public IResult Add(Rental rental)
         {
-            ValidationTool.Validate(new CustomerValidator(), rental);
+            
             //var results = _rentalDal.GetAll(x => x.CarId == rental.CarId);
             //foreach (var result in results)
             //{
@@ -36,6 +38,7 @@ namespace Business.Concrate
 
 
         }
+        [ValidationAspect(typeof(RentalValidator))]
 
         public IResult Delete(Rental rental)
         {
@@ -52,7 +55,8 @@ namespace Business.Concrate
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(x => x.CarId == id));
         }
-     
+
+        [ValidationAspect(typeof(RentalValidator))]
 
         public IResult Update(Rental rental)
         {

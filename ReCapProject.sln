@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{5049B4A8-5F46-48DC-A57D-573FA935AEBD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{62086708-6F4A-4FD2-BA39-64F7EF2BCDDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console", "ConsoleApp1\Console.csproj", "{62086708-6F4A-4FD2-BA39-64F7EF2BCDDB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{677E44B0-B669-498A-BCBC-1B585BB7E666}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{65362147-FE23-402F-9F39-71976BD49502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{65362147-FE23-402F-9F39-71976BD49502}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
